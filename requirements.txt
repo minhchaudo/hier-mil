@@ -1,0 +1,9 @@
+numpy==1.26.4
+optuna==4.1.0
+pandas==2.2.2
+scanpy==1.10.4
+scikit-learn==1.4.2
+scipy==1.13.0
+torch==2.2.2
+torch-geometric==2.6.1
+
