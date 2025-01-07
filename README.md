@@ -18,7 +18,7 @@ pip install -r requirements.txt
 
 To train a model, our implementation expects a `.h5ad` file readable by `Scanpy` as input. The `.X` attribute of the `adata` object should contain either the gene expression or the latent representations of all single cells in the dataset. The `.obs` attribute of the `adata` object should contain at least the patient identifiers, the labels (encoded as 0/1 for binary tasks or as integers for multiclass tasks), and the cell type annotations.
 
-For training and tuning a model, run
+To train and tune a model, run
 
 ```
 python run.py \
