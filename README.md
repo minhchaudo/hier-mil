@@ -28,11 +28,11 @@ python run.py \
 --patient_id_key [patient_id_key] \
 --label_key [label_key]
 --cell_type_annot_key [cell_type_annot_key] \
-
+--attn1 [attn1]
 
 ```
 
-where `[input_path]` is the path to the input file, `[model_path]` is the path to save the trained model, `[patient_id_key]` is the column name of the patient IDs in `.obs`, `label_key` is the column name of the labels, and `cell_type_annot_key` is the column name of the cell type annotations.
+where `[input_path]` is the path to the input file, `[model_path]` is the path to save the trained model, `[patient_id_key]` is the column name of the patient IDs in `.obs`, `[label_key]` is the column name of the labels, and `[cell_type_annot_key]` is the column name of the cell type annotations. Please set the option `[attn1]` to `0` to use the CTA model and to `1` (the default) to use the HA model.
 
 To predict on new data, run
 
@@ -43,6 +43,7 @@ python run.py \
 --task 1 \
 --patient_id_key [patient_id_key] \
 --cell_type_annot_key [cell_type_annot_key] \
+--attn1 [attn1]
 
 ```
 
