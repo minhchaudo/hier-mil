@@ -53,6 +53,5 @@ Note that the number of input dimensions (the number of dimensions in the `adata
 
 To reproduce the experiments described in the manuscript:
 
-- Download and preprocess the four datasets following Section 4.1 in the manuscript
-- Name the files `cardio.h5ad`, `covid.h5ad`, `aml-icb.h5ad`, and `icb.h5ad` accordingly and put them in the same directory as the code
+- Download and preprocess the four datasets following the instructions and code in the `data` folder
 - Run `sh run.sh`

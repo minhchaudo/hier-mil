@@ -1,5 +1,5 @@
 #!/bin/bash
-datasets=("cardio" "covid" "aml-icb" "icb")
+datasets=("cardio" "covid" "icb")
 
 # repeated 10-fold CV
 
@@ -120,24 +120,6 @@ python run.py \
 --n_epochs 1000 \
 --dropout 0.5 \
 --weight_decay 0.001 
-
-# identify key cell types aml-icb
-
-filename="aml-icb.h5ad"
-output="aml_icb_key_ct_out.csv"
-
-python run.py \
---data_path "$filename" \
---output "$output" \
---task 6 \
---attn1 1 \
---attn2 1 \
---n_perm 100 \
---n_folds 5 \
---n_epochs 100 \
---dropout 0 \
---weight_decay 0.001 
-
 
 
 
