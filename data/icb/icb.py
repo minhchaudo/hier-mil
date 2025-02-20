@@ -28,7 +28,7 @@ meta["cell_type_annotation"] = ct["pruned.labels"]
 meta = meta[meta["cell_type_annotation"].notna()]
 
 genes = pd.read_csv("genes_icb.csv")["Gene"].to_list()
-adata = sc.AnnData(X[genes])
+adata = sc.AnnData(X.loc[meta.index, genes])
 adata.obs.index = X.index
 adata.var.index = genes
 adata.obs = meta.loc[adata.obs.index, :]
