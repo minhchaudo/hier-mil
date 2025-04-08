@@ -113,6 +113,7 @@ python run.py \
 --data_path "$filename" \
 --output "$output" \
 --task 6 \
+--cell_type_annot_key "original_cell_type_annotation" \
 --attn1 1 \
 --attn2 1 \
 --n_perm 100 \

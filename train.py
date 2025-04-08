@@ -59,8 +59,8 @@ def predict_and_save(df, meta, args):
     samples = df[["patient", "label"]].drop_duplicates()
     X, _, batch, meta  = get_data(df, args.all_ct, samples, binary=args.binary, meta=meta if args.use_meta else None, attn2=args.attn2)
     pred = predict(args.model_save_path, X, batch, meta, len(samples), args).cpu().numpy()
-    samples["pred"] = pred
-    res = samples[["patient", "pred"]].reset_index(drop=True)
+    res = pd.DataFrame(pred)
+    res.index = samples["patient"].to_list()
     res.to_csv(args.output)
     return res
 

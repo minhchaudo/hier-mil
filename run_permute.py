@@ -22,7 +22,7 @@ def extract_cell_type_logits(df, args, perm=False, seed=None, reduce=True):
 
         X_train, y_train, batch_train, _  = get_data(df, args.all_ct, train_samples, binary=args.binary)
 
-        model = train(X_train, y_train, batch_train, None, args, dropout=args.dropout, n_layers_lin=args.n_layers_lin, n_layers_lin2=1, n_layers_lin_meta=args.n_layers_lin_meta, n_hid=args.n_hid, n_hid2=0, lr=args.lr, weight_decay=args.weight_decay, n_epochs=args.n_epochs, seed=0, save=False)
+        model = train(X_train, y_train, batch_train, None, args, dropout=args.dropout, n_layers_lin=args.n_layers_lin, n_layers_lin2=0, n_layers_lin_meta=1, n_hid=args.n_hid, n_hid2=0, lr=args.lr, weight_decay=args.weight_decay, n_epochs=args.n_epochs, seed=0, save=False)
 
         X_test, y_test, batch_test = X_test.to(args.device), y_test.to(args.device), batch_test.to(args.device)
 
@@ -51,10 +51,12 @@ def extract_cell_type_logits(df, args, perm=False, seed=None, reduce=True):
             tmp = tmp.sum(0)
     return tmp
 
-
 def get_p_val_cell_type(df, args):
     orig = extract_cell_type_logits(df, args, perm=False, seed=0, reduce=False)
-    orig_importance_score = orig[1] - orig[0]
+    if args.binary:
+        orig_importance_score = orig[1] - orig[0] # for binary case only
+    else:
+        orig_importance_score = orig.sum(0)
     orig = pd.DataFrame(orig, columns=args.all_ct)
     perm_importance_scores = []
     for i in range(args.n_perm):

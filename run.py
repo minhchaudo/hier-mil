@@ -20,7 +20,7 @@ if __name__ == "__main__":
     parser.add_argument("--n_folds", type=int, default=10)
     parser.add_argument("--n_folds_hyperparam_tune", type=int, default=10)
     parser.add_argument("--n_perm", type=int, default=100)
-    parser.add_argument("--device", default="cpu")
+    parser.add_argument("--device", default="cuda")
     parser.add_argument("--attn1", type=int, default=1)
     parser.add_argument("--attn2", type=int, default=1)
     parser.add_argument("--n_epochs", type=int, default=100)
@@ -84,7 +84,7 @@ if __name__ == "__main__":
 
     # randomize cell annot
     if args.task == 5:
-        cell_props = [0.05, 0.25, 0.5]
+        cell_props = [0.25, 0.5]
         res = randomize_cell_annot(cell_props, df, args)
         print(f"Results saved to {args.output}")
 

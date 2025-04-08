@@ -8,7 +8,7 @@ import scanpy as sc
 
 df = pd.read_csv("20210220_NasalSwab_RawCounts.txt", sep='\t')
 
-adata = sc.AnnData(df)
+adata = sc.AnnData(df.T)
 
 adata.obs.index = df.columns
 adata.var.index = df.index
@@ -29,7 +29,7 @@ adata.obs["label"] = adata.obs["disease__ontology_label"].apply(lambda x: 0 if x
 
 adata = adata[adata.obs["label"] != -1]
 
-adata.obs.rename({"donor_id":"patient", "cell_type__ontology_label":"cell_type_annotation"}, inplace=True)
+adata.obs.rename({"donor_id":"patient", "Coarse_Cell_Annotations": "original_cell_type_annotation"}, inplace=True)
 
 adata.write_h5ad("covid.h5ad")
 
@@ -43,8 +43,7 @@ ct = pd.read_csv("singler_covid.csv", index_col=0)
 
 adata.obs["cell_type_annotation"] = ct.loc[adata.obs.index, "pruned.labels"]
 
-adata = adata[adata.obs
-["cell_type_annotation"].notna()]
+adata = adata[adata.obs["cell_type_annotation"].notna()]
 
 adata.write_h5ad("../covid.h5ad")
 

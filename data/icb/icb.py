@@ -23,7 +23,7 @@ meta = meta[meta["label"] != -1]
 sample_to_patient = pd.read_csv("icb_sample_id_to_patient_id.csv").set_index("sample_id")
 meta["patient"] = meta["sample_id_pre_post"].apply(lambda x: sample_to_patient.loc[x, "patient"])
 
-ct = pd.read_csv("singler_icb_pre.csv", index_col=0)
+ct = pd.read_csv("singler_icb.csv", index_col=0)
 meta["cell_type_annotation"] = ct["pruned.labels"]
 meta = meta[meta["cell_type_annotation"].notna()]
 

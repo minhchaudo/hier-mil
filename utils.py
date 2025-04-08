@@ -57,9 +57,9 @@ def train(X_train, y_train, batch_train, meta_train, args, dropout=0., n_layers_
     set_seeds(seed)
     model = Model(X_train.shape[-1], n_out=1 if args.binary else args.n_classes, n_in_meta=0 if not args.use_meta else meta_train.shape[-1], \
     attn1=args.attn1, attn2=args.attn2, use_softmax=True, dropout=dropout, n_layers_lin=n_layers_lin, n_layers_lin2=0, \
-    n_layers_lin_meta=n_layers_lin_meta if not args.use_meta else 1, n_hid=n_hid, n_hid2=0).to(args.device)
+    n_layers_lin_meta=1 if not args.use_meta else n_layers_lin_meta, n_hid=n_hid, n_hid2=0).to(args.device)
     opt = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
-    loss_fn = torch.nn.BCEWithLogitsLoss() if args.binary else torch.nn.CrossEntropyLo
+    loss_fn = torch.nn.BCEWithLogitsLoss() if args.binary else torch.nn.CrossEntropyLoss()
     for epoch in range(n_epochs):
         model.train()
         opt.zero_grad()
@@ -71,14 +71,14 @@ def train(X_train, y_train, batch_train, meta_train, args, dropout=0., n_layers_
        torch.save(model, args.model_save_path)
     return model
 
-def load(X, meta, args):
-    model = torch.load(args.model_save_path)
-    return model.to(args.device)
+def load(model_save_path):
+    model = torch.load(model_save_path, weights_only=False)
+    return model
 
 def predict(model, X_test, batch_test, meta_test, n_samples_test, args):
     X_test, batch_test, meta_test = X_test.to(args.device), batch_test.to(args.device), meta_test.to(args.device) if meta_test is not None else meta_test
     if isinstance(model, str):
-        model = load(X_test, meta_test, args)
+        model = load(model).to(args.device)
     with torch.no_grad():
         model.eval()
         pred = model(X_test, batch_test, len(args.all_ct)*n_samples_test, len(args.all_ct), meta=meta_test)

@@ -4,20 +4,24 @@
 # 3. DCM_HCM_Expression_Matrix_barcodes_V1.tsv
 # 4. DCM_HCM_MetaData_V1.txt
 
+# The code is adapted from https://github.com/Teddy-XiongGZ/ProtoCell4P
 
 from scipy.io import mmread
+from scipy import sparse
 import scanpy as sc
 import pandas as pd
+import numpy as np
 
 data = mmread("DCM_HCM_Expression_Matrix_raw_counts_V1.mtx")
 
+data = sparse.csr_matrix(data.transpose())
 genes = pd.read_csv("DCM_HCM_Expression_Matrix_genes_V1.tsv", sep="\t", header=None).iloc[:,1].tolist()
 
 barcodes = open( "DCM_HCM_Expression_Matrix_barcodes_V1.tsv").read().strip().split("\n")
 
 meta = pd.read_csv("DCM_HCM_MetaData_V1.txt", sep="\t").drop(axis=0,index=0).reset_index(drop=True)
 
-adata = sc.AnnData(data)
+adata = sc.AnnData(data.astype(np.float32))
 adata.obs.index = barcodes
 adata.var.index = genes
 
