@@ -55,3 +55,5 @@ To reproduce the experiments described in the manuscript:
 
 - Download and preprocess the four datasets following the instructions and code in the `data` folder
 - Run `sh run.sh`
+
+Alternatively, refer to `Original_code.ipynb` for the original implementation of the experiments before code refactoring.
