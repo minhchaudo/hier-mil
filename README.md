@@ -49,6 +49,10 @@ python run.py \
 
 Note that the number of input dimensions (the number of dimensions in the `adata` object) should be the same for both training and inference data.
 
+## Data
+
+Preprocessed data objects can be found [here](https://drive.google.com/drive/folders/1x3zQX3RKMuYqNLNPwaSV82LAH97REiU-?usp=sharing). Download and place the files at the root directory of the project.
+
 ## Exeperiments
 
 To reproduce the experiments described in the manuscript:
