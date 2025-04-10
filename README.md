@@ -51,10 +51,10 @@ Note that the number of input dimensions (the number of dimensions in the `adata
 
 ## Data
 
-Preprocessed data objects can be found [here](https://drive.google.com/drive/folders/1x3zQX3RKMuYqNLNPwaSV82LAH97REiU-?usp=sharing). Download and place the files at the root directory of the project.
+Preprocessed data objects (Cardio, COVID, and ICB datasets) can be found [here](https://drive.google.com/drive/folders/1x3zQX3RKMuYqNLNPwaSV82LAH97REiU-?usp=sharing). Download and place the files at the root directory of the project before running the experiments.
 
 ## Exeperiments
 
-To reproduce the experiments described in the manuscript, run `sh run.sh`
+To run the experiments described in the manuscript, refer to `run.sh`. GPU acceleration and loop parallelization are recommended to speed up computation.
 
 Alternatively, refer to `Original_code.ipynb` for the original implementation of the experiments before code refactoring.
